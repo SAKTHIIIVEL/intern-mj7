@@ -6,14 +6,177 @@ export default function Footer() {
     <footer className="w-full bg-black text-white relative overflow-hidden">
       {/* FILM STRIP (FULL WIDTH) */}
       <div className="w-full overflow-hidden mb-10">
-        <Image
-          src="/film.png"
-          alt="Film Strip"
-          width={3000} // approximate real width
-          height={180} // approximate real height
-          className="w-full h-auto"
-          priority
-        />
+        <svg
+          width="1440"
+          height="337"
+          viewBox="0 0 1440 337"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g
+            clip-path="url(#clip0)"
+            transform-box="fill-box"
+            transform-origin="0% 50%"
+          >
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              values="-75 0 160; 0 0 160; 0 0 160; -75 0 160"
+              keyTimes="0;0.06;0.92;1"
+              dur="5s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="
+    0.9 0 0.2 1;
+    0 0 1 1;
+    0.9 0 0.2 1
+  "
+            />
+
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0 -14; 0 10; 0 10; 0 -14"
+              keyTimes="0;0.06;0.92;1"
+              dur="5s"
+              repeatCount="indefinite"
+              additive="sum"
+            />
+
+            <path
+              d="M-26.8 153.9L1437.1 0L1450.2 124.3L-13.7 278.2Z"
+              fill="#120E0D"
+            />
+
+            <rect
+              x="28"
+              y="78"
+              width="69"
+              height="234"
+              transform="rotate(-16 28 78)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="233"
+              y="57"
+              width="69"
+              height="234"
+              transform="rotate(-16 233 57)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="439"
+              y="35"
+              width="69"
+              height="234"
+              transform="rotate(-16 439 35)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="645"
+              y="14"
+              width="69"
+              height="234"
+              transform="rotate(-16 645 14)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="851"
+              y="-8"
+              width="69"
+              height="234"
+              transform="rotate(-16 851 -8)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="1057"
+              y="-30"
+              width="69"
+              height="234"
+              transform="rotate(-16 1057 -30)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="1263"
+              y="-51"
+              width="69"
+              height="234"
+              transform="rotate(-16 1263 -51)"
+              fill="#D9D9D9"
+            />
+          </g>
+
+          <g clip-path="url(#clip1)">
+            <rect x="-16" y="103" width="1472" height="234" fill="#120E0D" />
+
+            <rect
+              x="116"
+              y="135"
+              width="69"
+              height="234"
+              transform="rotate(17 116 135)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="323"
+              y="135"
+              width="69"
+              height="234"
+              transform="rotate(17 323 135)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="530"
+              y="135"
+              width="69"
+              height="234"
+              transform="rotate(17 530 135)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="737"
+              y="135"
+              width="69"
+              height="234"
+              transform="rotate(17 737 135)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="944"
+              y="135"
+              width="69"
+              height="234"
+              transform="rotate(17 944 135)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="1151"
+              y="135"
+              width="69"
+              height="234"
+              transform="rotate(17 1151 135)"
+              fill="#D9D9D9"
+            />
+            <rect
+              x="1358"
+              y="135"
+              width="69"
+              height="234"
+              transform="rotate(17 1358 135)"
+              fill="#D9D9D9"
+            />
+          </g>
+
+          <defs>
+            <clipPath id="clip0">
+              <path d="M-26.8 153.9L1437.1 0L1450.2 124.3L-13.7 278.2Z" />
+            </clipPath>
+
+            <clipPath id="clip1">
+              <rect x="-16" y="256" width="1472" height="81" />
+            </clipPath>
+          </defs>
+        </svg>
       </div>
       <div className="w-full h-[2px] bg-white/70" />
 
@@ -30,7 +193,7 @@ export default function Footer() {
             />
           </div>
 
-          <p className="text-[#DBDADA] text-[24px] leading-relaxed  font-light md:max-w-[430px]">
+          <p className="text-[#DBDADA] text-[20px] leading-relaxed  font-light md:max-w-[430px]">
             MJ7 Cinema Production is a creative powerhouse dedicated to crafting
             compelling cinematic experiences that resonate with audiences across
             cultures and platforms.
@@ -43,24 +206,24 @@ export default function Footer() {
             Home
           </h4>
 
-          <ul className="space-y-2 text-[#DBDADA] text-left font-light text-[24px]">
+          <ul className="space-y-2 text-[#DBDADA] text-left font-light text-[20px]">
             <li>
-              <Link href="/about" className="hover:text-white transition">
+              <Link href="#about" className="hover:text-white transition">
                 About
               </Link>
             </li>
             <li>
-              <Link href="/projects" className="hover:text-white transition">
+              <Link href="#projects" className="hover:text-white transition">
                 Projects
               </Link>
             </li>
             <li>
-              <Link href="/team" className="hover:text-white transition">
+              <Link href="#team" className="hover:text-white transition">
                 Team
               </Link>
             </li>
             <li>
-              <Link href="/portfolio" className="hover:text-white transition">
+              <Link href="#portfolio" className="hover:text-white transition">
                 Portfolio
               </Link>
             </li>
@@ -73,7 +236,7 @@ export default function Footer() {
             Contact Info
           </h4>
 
-          <ul className="space-y-4 text-[#DBDADA] font-light text-[24px]">
+          <ul className="space-y-4 text-[#DBDADA] font-light text-[20px]">
             <li className="flex items-start gap-3">
               <span className="text-red-600">
                 <svg

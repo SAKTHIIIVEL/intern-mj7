@@ -35,3 +35,88 @@ body {
 section {
   scroll-margin-top: 90px; /* adjust to navbar height */
 }
+
+/* ================================
+   STACK FROM BOTTOM → FAN OUT
+   (Video-matched motion)
+   ================================ */
+
+/* =========================================
+   STACK UP → DRIFT RIGHT → FAN + MOVE LEFT
+   ========================================= */
+
+@keyframes stackUp {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      translateX(var(--stack-x))
+      translateY(380px)
+      scale(0.94);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      translateX(var(--stack-x))
+      translateY(0px)
+      scale(1);
+  }
+}
+
+@keyframes stackDriftRight {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      translateX(var(--stack-x))
+      translateY(0px);
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--stack-x) + 460px))
+      translateY(0px);
+  }
+  100% {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--stack-x) + 60px))
+      translateY(0px);
+  }
+}
+
+@keyframes fanOut {
+  from {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--stack-x) + 60px))
+      translateY(0px);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--fan-x)))
+      translateY(var(--y))
+      rotate(var(--r))
+      scale(var(--s));
+  }
+}
+
+/* =========================================
+   Portfolio Deck Scroll Animation
+   ========================================= */
+
+.animate-portfolio {
+  animation:
+    stackUp 1200ms cubic-bezier(0.16,1,0.3,1) forwards,
+    stackDriftRight 6600ms cubic-bezier(0.22,1,0.36,1) forwards,
+    fanOut 1100ms cubic-bezier(0.22,1,0.36,1) forwards;
+
+  animation-delay:
+    0ms,
+    1250ms,
+    1900ms;
+}

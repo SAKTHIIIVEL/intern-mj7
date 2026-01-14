@@ -90,7 +90,7 @@ export default function ContactUs() {
             </span>
           </h2>
 
-          <p className="text-white-400 text-[24px]max-w-md mb-12">
+          <p className="text-white text-[24px]max-w-md mb-12">
             We specialize in producing high-quality films, digital content, and
             visual narratives that blend strong concepts with striking
             aesthetics.

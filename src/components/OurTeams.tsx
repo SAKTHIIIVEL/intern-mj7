@@ -34,7 +34,7 @@ const teamMembers: TeamMember[] = [
 
 export default function OurTeams() {
   return (
-    <section className="w-full bg-black py-18 px-6 md:px-20">
+    <section id="team" className="w-full bg-black py-18 px-6 md:px-20">
       {/* Heading */}
       <div className="max-w-9xl mx-auto text-center mb-20 px-12">
         <h2 className="text-6xl md:text-[100px] font-[900] mb-6 text-left">

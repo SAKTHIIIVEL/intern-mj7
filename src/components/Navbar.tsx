@@ -27,7 +27,7 @@ export default function Navbar() {
           {navItems.map((item) => (
             <Link
               key={item}
-              href={`/${item.toLowerCase()}`}
+              href={`#${item.toLowerCase()}`}
               className="font-poppins font-normal text-[20px] leading-[30px] text-white uppercase hover:opacity-80 transition-opacity whitespace-nowrap"
               style={{
                 fontFamily: "var(--font-poppins), 'Poppins', sans-serif",

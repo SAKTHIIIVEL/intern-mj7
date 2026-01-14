@@ -25,6 +25,7 @@ useEffect(() => {
 
   return (
     <section
+    id="about"
       ref={sectionRef}
       className="w-full bg-black py-16 px-12 overflow-hidden"
     >

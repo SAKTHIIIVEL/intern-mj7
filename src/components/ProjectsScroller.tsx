@@ -29,7 +29,7 @@ export default function ProjectsScroller() {
   }, []);
 
   return (
-    <section className="w-full bg-black py-24 overflow-hidden">
+    <section id="project" className="w-full bg-black py-24 overflow-hidden">
       <h2 className="text-center text-6xl md:text-9xl font-extrabold mb-24">
         <span className="text-white">OUR </span>
         <span className="text-red-600">PROJECTS</span>

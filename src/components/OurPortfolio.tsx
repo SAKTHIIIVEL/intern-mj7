@@ -14,7 +14,7 @@ const posters = [
 
 export default function OurPortfolio() {
   return (
-    <section className="w-full bg-black py-28 overflow-hidden">
+    <section id="portfolio" className="w-full bg-black py-28 overflow-hidden">
       {/* Heading */}
       <div className="text-center mb-8">
         <h2 className="text-[64px] md:text-[96px] font-[900]">

@@ -70,13 +70,14 @@ export default function OurPortfolio() {
                   playAnimation ? "animate-portfolio" : ""
                 }`}
                 style={{
-                  "--stack-x": `${STACK_BASE_X + stackOffset}px`,
-                  "--fan-x": `${offset * 160 + FAN_CENTER_SHIFT}px`,
-                  "--y": `${Math.abs(offset) * 28}px`,
-                  "--r": `${offset * 4}deg`,
-                  "--s": `${1 - Math.abs(offset) * 0.02}`,
-                  zIndex: index,
-                }}
+  "--stack-x": `${STACK_BASE_X + stackOffset}px`,
+  "--fan-x": `${offset * 160 + FAN_CENTER_SHIFT}px`,
+  "--y": `${Math.abs(offset) * 28}px`,
+  "--r": `${offset * 4}deg`,
+  "--s": `${1 - Math.abs(offset) * 0.02}`,
+  zIndex: index,
+} as React.CSSProperties}
+
               >
                 <div className="relative w-[200px] h-[280px] transition-transform duration-300 ease-out
              hover:-translate-y-4 hover:scale-[1.03]">

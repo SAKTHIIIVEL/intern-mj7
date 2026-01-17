@@ -42,7 +42,7 @@ export default function OurPortfolio() {
     <section
       ref={sectionRef}
       id="portfolio"
-      className="relative w-full bg-black py-28 overflow-hidden"
+      className="relative w-full bg-black py-[30px] overflow-hidden"
     >
       {/* Heading */}
       <div className="text-center mb-12">

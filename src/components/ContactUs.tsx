@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { useEffect, useRef } from "react";
+
 
 type FormData = {
   firstName: string;
@@ -77,11 +79,64 @@ export default function ContactUs() {
     }
   };
 
+  const leftRef = useRef<HTMLDivElement>(null);
+const rightRef = useRef<HTMLFormElement>(null);
+
+const [showLeft, setShowLeft] = useState(false);
+const [showRight, setShowRight] = useState(false);
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkMobile = () => setIsMobile(window.innerWidth < 768);
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.target === leftRef.current) {
+          setShowLeft(entry.isIntersecting);
+        }
+
+        if (entry.target === rightRef.current) {
+          setShowRight(entry.isIntersecting);
+        }
+      });
+    },
+    {
+      threshold: 0.3, // triggers when 30% visible
+    }
+  );
+
+  if (leftRef.current) observer.observe(leftRef.current);
+  if (rightRef.current) observer.observe(rightRef.current);
+
+  return () => {
+    window.removeEventListener("resize", checkMobile);
+    observer.disconnect();
+  };
+}, []);
+
+
+
   return (
     <section id="contact" className="w-full bg-black py-24 px-6 max-[1439px]:px-[120px] min-[1440px]:px-[152px]">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
         {/* LEFT CONTENT */}
-        <div>
+        <div
+  ref={leftRef}
+  className={`
+    transition-all duration-700 ease-out
+    ${
+      showLeft
+        ? "opacity-100 translate-x-0 translate-y-0"
+        : isMobile
+        ? "opacity-0 -translate-y-14"
+        : "opacity-0 -translate-x-20"
+    }
+  `}
+>
+
           <h2 className="text-[100px] font-[900] leading-none mb-6">
             <span className="text-red-600">CONTACT</span>
             <br />
@@ -191,7 +246,23 @@ export default function ContactUs() {
         </div>
 
        {/* RIGHT FORM */}
-<form onSubmit={handleSubmit} noValidate className="space-y-8">
+<form
+  ref={rightRef}
+  onSubmit={handleSubmit}
+  noValidate
+  className={`
+    space-y-8
+    transition-all duration-700 ease-out
+    ${
+      showRight
+        ? "opacity-100 translate-x-0 translate-y-0"
+        : isMobile
+        ? "opacity-0 translate-y-14"
+        : "opacity-0 translate-x-20"
+    }
+  `}
+>
+
   <h3 className="text-white text-[32px] mb-6">
     Lets Stay In Touch
   </h3>

@@ -1,44 +1,99 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Navbar() {
   const navItems = ["ABOUT", "PROJECT", "TEAM", "PORTFOLIO", "CONTACT"];
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full h-[120px] bg-black z-50">
-      {/* Main container matching Figma Frame 2 */}
-      <div className="w-full max-w-[1440px] h-full mx-auto pl-[90px] pr-[100px] flex flex-row justify-between items-center relative">
-        {/* Group 1 - Logo */}
-        <div className="w-[142.93px] h-[94px] flex-shrink-0 relative top-[13px]">
-          <Link href="/" className="block w-full h-full">
+    <>
+      {/* NAVBAR */}
+      <nav className="fixed top-0 left-0 w-full h-[64px] md:h-[120px] bg-black z-50">
+        <div
+          className="
+            h-full flex items-center justify-between
+            px-4
+            md:max-w-[1440px] md:mx-auto md:px-[90px]
+          "
+        >
+          {/* LOGO */}
+          <Link
+            href="/"
+            className="relative w-[80px] h-[48px] md:w-[143px] md:h-[94px]"
+          >
             <Image
               src="/navbar_logo.png"
               alt="MJ7 Logo"
-              width={143}
-              height={94}
-              className="rounded-[4px] object-contain"
+              fill
+              className="object-contain"
               priority
             />
           </Link>
-        </div>
 
-        {/* Frame 1 - Navigation Items */}
-        <div className="flex flex-row justify-center items-center gap-[51px] h-[30px] flex-shrink-0">
+          {/* DESKTOP MENU */}
+          <div className="hidden md:flex gap-[51px]">
+            {navItems.map((item) => (
+              <Link
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-white text-[20px] uppercase hover:opacity-80"
+              >
+                {item}
+              </Link>
+            ))}
+          </div>
+
+          {/* HAMBURGER */}
+          <button
+            className="md:hidden flex flex-col gap-[6px]"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            <span className="w-[26px] h-[2px] bg-red-500"></span>
+            <span className="w-[26px] h-[2px] bg-red-500"></span>
+            <span className="w-[26px] h-[2px] bg-red-500"></span>
+          </button>
+        </div>
+      </nav>
+
+      {/* MOBILE SLIDE MENU */}
+      <div
+        className={`fixed top-0 right-0 h-screen w-[85vw] max-w-[360px] bg-black z-[60]
+        transform transition-transform duration-300 ease-in-out
+        ${menuOpen ? "translate-x-0" : "translate-x-full"}
+        pt-[env(safe-area-inset-top)]`}
+      >
+        <button
+          className="absolute top-5 right-5 text-white text-3xl"
+          onClick={() => setMenuOpen(false)}
+        >
+          ✕
+        </button>
+
+        <div className="flex flex-col justify-center items-start px-6 h-full gap-8">
           {navItems.map((item) => (
             <Link
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="font-poppins font-normal text-[20px] leading-[30px] text-white uppercase hover:opacity-80 transition-opacity whitespace-nowrap"
-              style={{
-                fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
-              }}
+              onClick={() => setMenuOpen(false)}
+              className="text-white text-[22px] uppercase"
             >
               {item}
             </Link>
           ))}
         </div>
       </div>
-    </nav>
+
+      {/* BACKDROP */}
+      {menuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[55]"
+          onClick={() => setMenuOpen(false)}
+        />
+      )}
+    </>
   );
 }
-

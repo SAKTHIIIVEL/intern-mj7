@@ -7,8 +7,7 @@ export default function Footer() {
       {/* FILM STRIP (FULL WIDTH) */}
       <div className="w-full overflow-hidden mb-10">
         <svg
-          width="1440"
-          height="337"
+         
           viewBox="0 0 1440 337"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +180,7 @@ export default function Footer() {
       <div className="w-full h-[2px] bg-white/70" />
 
       {/* MAIN FOOTER CONTENT */}
-      <div className="max-w-[1440px] mx-auto px-6 md:pl-30 pr-15 py-16 grid grid-cols-1 md:grid-cols-3 gap-22">
+      <div className="max-w-[1440px] mx-auto px-6 md:pl-30 pr-15 py-16 grid grid-cols-1 md:grid-cols-3 gap-22 max-sm:gap-[40px]">
         {/* LEFT : LOGO + ABOUT */}
         <div className="space-y-6">
           <div className="flex items-center gap-3">
@@ -201,7 +200,7 @@ export default function Footer() {
         </div>
 
         {/* CENTER : NAV LINKS */}
-        <div className="space-y-4 text-center mx-auto">
+        <div className="space-y-4 text-center md:mx-auto">
           <h4 className="text-red-600 text-[24px] text-left font-semibold text-lg">
             Home
           </h4>

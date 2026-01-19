@@ -56,7 +56,7 @@ const [paused, setPaused] = useState(false);
   return (
     <section
       id="project"
-      className="relative w-full bg-black py-32 overflow-visible"
+      className="relative w-full bg-black py-[32px] overflow-visible"
     >
       {/* 🔴 CINEMATIC RED VIGNETTE */}
       <div
@@ -68,7 +68,7 @@ const [paused, setPaused] = useState(false);
       />
 
       {/* TITLE */}
-      <h2 className="relative z-10 text-center text-6xl md:text-9xl font-extrabold mb-20">
+      <h2 className="relative z-10 text-center text-6xl max-sm:text-[48px] md:text-9xl font-extrabold mb-20">
         <span className="text-white">OUR </span>
         <span className="text-red-600">PROJECTS</span>
       </h2>

@@ -74,7 +74,7 @@ export default function ScheduleForm() {
         {/* Title */}
         <h2
           className="absolute -top-35 left-6 md:left-13
-             text-[64px] md:text-[130px]
+             text-[64px] max-sm:text-[48px] max-sm:top-[-100px] max-sm:left-[60px] md:text-[130px]
              font-[900] text-red-600
              z-0 pointer-events-none select-none"
         >
@@ -82,7 +82,7 @@ export default function ScheduleForm() {
         </h2>
 
         {/* Form Card */}
-        <div className="bg-white max-w-[860px] p-10 min-[1450px]:mr-15 md:p-14 shadow-xl ml-auto mr-[50px] relative z-10">
+        <div className="bg-white max-w-[860px] p-10 max-sm:m-0 min-[1450px]:mr-15 md:p-14 shadow-xl ml-auto mr-[50px] relative z-10">
           <form
             noValidate
             onSubmit={handleSubmit}
@@ -90,7 +90,7 @@ export default function ScheduleForm() {
           >
             {/* First Name */}
             <div>
-              <label className="block text-[16px] text-gray-600 mb-2">
+              <label className="block text-[16px] text-gray-600 mb-2 max-sm:text-[#000000BF]">
                 First Name
               </label>
               <input
@@ -108,7 +108,7 @@ export default function ScheduleForm() {
 
             {/* Last Name */}
             <div>
-              <label className="block text-[16px] text-gray-600 mb-2">
+              <label className="block text-[16px] text-gray-600 mb-2 max-sm:text-[#000000BF]">
                 Last Name
               </label>
               <input
@@ -126,7 +126,7 @@ export default function ScheduleForm() {
 
             {/* Email */}
             <div>
-              <label className="block text-[16px] text-gray-600 mb-2">
+              <label className="block text-[16px] text-gray-600 mb-2 max-sm:text-[#000000BF]">
                 Email Id
               </label>
               <input
@@ -144,7 +144,7 @@ export default function ScheduleForm() {
 
             {/* Phone */}
             <div>
-              <label className="block text-[16px] text-gray-600 mb-2">
+              <label className="block text-[16px] text-gray-600 mb-2 max-sm:text-[#000000BF]">
                 Phone Number
               </label>
               <input
@@ -167,7 +167,7 @@ export default function ScheduleForm() {
 
             {/* Date */}
             <div>
-              <label className="block text-[16px] text-gray-600 mb-2">
+              <label className="block text-[16px] text-gray-600 mb-2 max-sm:text-[#000000BF]">
                 Available Dates
               </label>
               <input
@@ -185,7 +185,7 @@ export default function ScheduleForm() {
 
             {/* Category */}
             <div className="relative">
-              <label className="block text-[16px] text-gray-600 mb-2">
+              <label className="block text-[16px] text-gray-600 mb-2 max-sm:text-[#000000BF]">
                 Select Category
               </label>
 
@@ -231,7 +231,7 @@ export default function ScheduleForm() {
 
             {/* Reason */}
             <div className="md:col-span-2">
-              <label className="block text-[16px] text-gray-600 mb-2">
+              <label className="block text-[16px] text-gray-600 mb-2 max-sm:text-[#000000BF]">
                 Reason For Reaching Out
               </label>
               <textarea

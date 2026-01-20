@@ -2,7 +2,7 @@
 
 export default function Banner() {
   return (
-    <section className="relative w-full h-[886px] bg-black max-md:hidden overflow-hidden">
+    <section className="relative w-full lg:h-[886px] bg-black max-md:hidden md:h-[550px] overflow-hidden">
       {/* Video Background */}
       <video
         autoPlay

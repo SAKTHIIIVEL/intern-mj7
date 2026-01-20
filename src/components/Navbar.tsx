@@ -11,18 +11,18 @@ export default function Navbar() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="fixed top-0 left-0 w-full h-[64px] md:h-[120px] bg-black z-50">
+      <nav className="fixed top-0 left-0 w-full h-[64px] lg:h-[120px] bg-black z-50">
         <div
           className="
             h-full flex items-center justify-between
             px-4
-            md:max-w-[1440px] md:mx-auto md:px-[90px]
+            lg:max-w-[1440px] lg:mx-auto lg:px-[90px]
           "
         >
           {/* LOGO */}
           <Link
             href="/"
-            className="relative w-[80px] h-[48px] md:w-[143px] md:h-[94px]"
+            className="relative w-[80px] h-[48px] lg:w-[143px] lg:h-[94px]"
           >
             <Image
               src="/navbar_logo.png"
@@ -33,7 +33,7 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* DESKTOP MENU */}
+          {/* DESKTOP MENU (Tablet + Laptop) */}
           <div className="hidden md:flex gap-[51px]">
             {navItems.map((item) => (
               <Link
@@ -46,7 +46,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* HAMBURGER */}
+          {/* HAMBURGER (Mobile only) */}
           <button
             className="md:hidden flex flex-col gap-[6px]"
             onClick={() => setMenuOpen(true)}

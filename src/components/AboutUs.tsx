@@ -30,7 +30,7 @@ export default function AboutUs() {
     >
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
-        <h2 className="text-left text-red-600 text-6xl max-sm:text-center lg:pl-[110px] md:text-[96px] font-[900] mb-16 uppercase">
+        <h2 className="text-left text-red-600 text-6xl xxs:text-[42px] xs:text-[50px] xs1:text-[55px] max-sm:text-center lg:pl-[110px] md:text-[96px] font-[900] mb-16 uppercase">
           ABOUT <span className="text-gray-200">US</span>
         </h2>
 

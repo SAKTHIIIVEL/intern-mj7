@@ -51,7 +51,7 @@ export default function OurTeams() {
       </div>
 
       {/* Team Cards */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 place-items-center sm:place-items-stretch">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 place-items-center sm:place-items-stretch lg:px-7">
         {teamMembers.map((member, index) => (
           <TeamCard
             key={index}

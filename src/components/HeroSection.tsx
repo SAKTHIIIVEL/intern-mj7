@@ -24,7 +24,7 @@ export default function HeroSection() {
         </p>
 
         {/* Main Heading */}
-        <h1 className="max-sm:text-[24px] text-white font-extrabold text-[36px] md:text-[64px] leading-tight max-w-5xl">
+        <h1 className="xxs:text-[20px] xs:text-[22px] max-sm:text-[24px] text-white font-extrabold text-[36px] md:text-[64px] leading-tight max-w-5xl">
           We Don’t Just Make{" "}
           <span className="text-red-600">Movies</span>, <br />
           We Create{" "}

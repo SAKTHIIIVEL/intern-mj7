@@ -74,7 +74,7 @@ export default function ScheduleForm() {
         {/* Title */}
         <h2
           className="absolute -top-35 left-6 md:left-13
-             text-[64px] max-sm:text-[48px] max-sm:top-[-100px] max-sm:left-[60px] md:text-[130px]
+             text-[64px] xxs:left-[25px] max-sm:text-[48px] max-sm:top-[-100px] xs1:left-[60px] md:text-[130px]
              font-[900] text-red-600
              z-0 pointer-events-none select-none"
         >

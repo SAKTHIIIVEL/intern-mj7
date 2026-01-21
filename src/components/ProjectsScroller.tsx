@@ -96,16 +96,23 @@ export default function ProjectsScroller() {
 
   /* ---------------- autoplay ---------------- */
   useEffect(() => {
-    if (paused) return;
+  if (paused) return;
 
-    const loop = () => {
-      moveStep(1);
-      rafRef.current = setTimeout(loop, MOVE_TIME + HOLD_TIME);
-    };
+  const loop = () => {
+    moveStep(1);
+    rafRef.current = setTimeout(loop, MOVE_TIME + HOLD_TIME);
+  };
 
-    rafRef.current = setTimeout(loop, HOLD_TIME);
-    return () => rafRef.current && clearTimeout(rafRef.current);
-  }, [paused, vw]);
+  rafRef.current = setTimeout(loop, HOLD_TIME);
+
+  return () => {
+    if (rafRef.current !== null) {
+      clearTimeout(rafRef.current);
+      rafRef.current = null;
+    }
+  };
+}, [paused, vw]);
+
 
   /* ---------------- drag ---------------- */
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {

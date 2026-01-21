@@ -1,6 +1,12 @@
 "use client";
 
 export default function HeroSection() {
+  const handleContactScroll = () => {
+  document.getElementById("contact")?.scrollIntoView({
+    behavior: "smooth",
+  });
+};
+
   return (
     <section className="relative w-full h-[816px] overflow-hidden max-sm:h-[500px]">
       {/* Background Video */}
@@ -36,8 +42,9 @@ export default function HeroSection() {
           className="mt-10 px-8 py-4 bg-red-600 max-sm:text-[15px] max-sm:font-[500] hover:bg-red-700
                      text-white font-semibold rounded-md
                      transition duration-300"
+                     onClick={handleContactScroll}
         >
-          Explore More
+          Contact Us
         </button>
       </div>
     </section>

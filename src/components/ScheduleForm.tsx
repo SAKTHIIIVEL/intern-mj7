@@ -65,7 +65,6 @@ export default function ScheduleForm() {
   return (
     <section className="w-full bg-black py-26 px-6 lg:px-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative">
-
         {/* Title */}
         <h2
           className="
@@ -94,9 +93,13 @@ export default function ScheduleForm() {
               </label>
               <input
                 type="text"
+                inputMode="text"
                 value={form.firstName}
                 onChange={(e) =>
-                  setForm({ ...form, firstName: e.target.value })
+                  setForm({
+                    ...form,
+                    firstName: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+                  })
                 }
                 className="w-full border-b border-gray-400 focus:border-black outline-none py-2 text-black bg-transparent"
               />
@@ -114,7 +117,10 @@ export default function ScheduleForm() {
                 type="text"
                 value={form.lastName}
                 onChange={(e) =>
-                  setForm({ ...form, lastName: e.target.value })
+                  setForm({
+                    ...form,
+                    lastName: e.target.value.replace(/[^A-Za-z\s]/g, ""),
+                  })
                 }
                 className="w-full border-b border-gray-400 focus:border-black outline-none py-2 text-black bg-transparent"
               />
@@ -131,9 +137,7 @@ export default function ScheduleForm() {
               <input
                 type="email"
                 value={form.email}
-                onChange={(e) =>
-                  setForm({ ...form, email: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
                 className="w-full border-b border-gray-400 focus:border-black outline-none py-2 text-black bg-transparent"
               />
               <p className="text-red-500 text-xs mt-1 min-h-[16px]">
@@ -172,9 +176,7 @@ export default function ScheduleForm() {
               <input
                 type="date"
                 value={form.date}
-                onChange={(e) =>
-                  setForm({ ...form, date: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, date: e.target.value })}
                 className="w-full border-b border-gray-400 focus:border-black outline-none py-2 text-black bg-transparent"
               />
               <p className="text-red-500 text-xs mt-1 min-h-[16px]">
@@ -194,15 +196,17 @@ export default function ScheduleForm() {
                   onChange={(e) =>
                     setForm({ ...form, category: e.target.value })
                   }
-                  className="w-full border-b border-gray-400 focus:border-black outline-none py-2 pr-10 bg-transparent text-black appearance-none cursor-pointer"
+                  className="w-full border-b border-gray-400 focus:border-black outline-none py-2 pr-8
+             bg-transparent text-black appearance-none cursor-pointer
+             text-[15px] md:text-[16px]"
                 >
                   <option value="" disabled hidden />
-                  <option>Film</option>
-                  <option>Digital Content</option>
-                  <option>Brand Collaboration</option>
+                  <option className="text-[15px]">Film</option>
+                  <option className="text-[15px]">Digital Content</option>
+                  <option className="text-[15px]">Brand Collaboration</option>
                 </select>
 
-                <span className="absolute right-0 top-1/2 -translate-y-1/2">
+                <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg
                     className="w-10 h-10 text-black"
                     fill="none"
@@ -232,9 +236,7 @@ export default function ScheduleForm() {
               <textarea
                 rows={2}
                 value={form.reason}
-                onChange={(e) =>
-                  setForm({ ...form, reason: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, reason: e.target.value })}
                 className="w-full border-b border-gray-400 focus:border-black outline-none py-2 resize-none text-black bg-transparent"
               />
               <p className="text-red-500 text-xs mt-1 min-h-[16px]">
@@ -251,7 +253,6 @@ export default function ScheduleForm() {
                 Submit
               </button>
             </div>
-
           </form>
         </div>
       </div>

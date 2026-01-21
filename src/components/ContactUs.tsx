@@ -151,9 +151,11 @@ export default function ContactUs() {
         >
           <h2
             className="
-              text-[100px]
+              text-[38px]
               min-[768px]:max-[1023px]:text-[58px]
               max-sm:text-[48px]
+              lg:text-[80px]
+              xl:text-[100px]
               font-[900] leading-none mb-6
             "
           >
@@ -161,7 +163,7 @@ export default function ContactUs() {
             <br />
             <span className="text-white flex items-center gap-4">
               US
-              <span className="max-sm:hidden w-[260px] h-[5px] bg-white inline-block" />
+              <span className="max-md:hidden w-[260px] h-[5px] bg-white inline-block" />
               <span className="md:hidden w-[160px] h-[5px] bg-white inline-block" />
             </span>
           </h2>
@@ -292,7 +294,7 @@ export default function ContactUs() {
             <input
               type="text"
               value={form.firstName}
-              onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+              onChange={(e) => setForm({ ...form, firstName: e.target.value.replace(/[^A-Za-z\s]/g, "") })}
               className="w-full bg-transparent border-b border-gray-600
                  focus:border-white outline-none py-2 text-white"
             />

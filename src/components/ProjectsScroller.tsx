@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const projects = [
+const IMAGES = [
   "/movie_posters/movie_1.png",
   "/movie_posters/movie_2.jpg",
   "/movie_posters/movie_3.jpg",
@@ -11,160 +11,237 @@ const projects = [
   "/movie_posters/movie_5.jpg",
 ];
 
-export default function ProjectsScroller() {
-  const [activeIndex, setActiveIndex] = useState(2);
-  const [centerOffset, setCenterOffset] = useState(0);
-  const [direction, setDirection] = useState(1); // 1 = right, -1 = left
-const [paused, setPaused] = useState(false);
+// infinite loop buffer
+const projects = [...IMAGES, ...IMAGES, ...IMAGES];
 
-  const CARD_WIDTH = 240;
-  const GAP = 32;
-  const STEP = CARD_WIDTH + GAP;
+export default function ProjectsScroller() {
+  /* ---------------- refs ---------------- */
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const xRef = useRef(0);
+  const rafRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isAnimatingRef = useRef(false);
+  const startXRef = useRef(0);
+  const dragStartRef = useRef(0);
+
+  /* ---------------- viewport ---------------- */
+  const [vw, setVw] = useState(0);
 
   useEffect(() => {
-    const updateCenter = () => {
-      setCenterOffset(window.innerWidth / 2 - CARD_WIDTH / 2);
-    };
-    updateCenter();
-    window.addEventListener("resize", updateCenter);
-    return () => window.removeEventListener("resize", updateCenter);
+    const update = () => setVw(window.innerWidth);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
+  const IS_MOBILE = vw < 640;
+
+  /* ---------------- sizing ---------------- */
+  const CARD_WIDTH = IS_MOBILE ? 190 : 240;
+  const GAP = IS_MOBILE ? 20 : 32;
+  const STEP = CARD_WIDTH + GAP;
+
+  const MOVE_TIME = 700;
+  const HOLD_TIME = 900;
+
+  /* ---------------- state ---------------- */
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  /* ---------------- helpers ---------------- */
+  const getCenterOffset = () => vw / 2 - CARD_WIDTH / 2;
+
+  const applyTransform = (x: number, animate = true) => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    el.style.transition = animate
+      ? `transform ${MOVE_TIME}ms ease-out`
+      : "none";
+
+    el.style.transform = `translateX(${getCenterOffset() - x}px)`;
+  };
+
+  const normalizeX = () => {
+    const loopWidth = IMAGES.length * STEP;
+
+    if (xRef.current >= loopWidth * 2) {
+      xRef.current -= loopWidth;
+      applyTransform(xRef.current, false);
+    }
+
+    if (xRef.current <= loopWidth) {
+      xRef.current += loopWidth;
+      applyTransform(xRef.current, false);
+    }
+  };
+
+  /* ---------------- step movement ---------------- */
+  const moveStep = (dir: number) => {
+    if (isAnimatingRef.current) return;
+
+    isAnimatingRef.current = true;
+
+    // activate NEXT card first
+    setActiveIndex((prev) => (prev + dir + IMAGES.length) % IMAGES.length);
+
+    // then move track
+    xRef.current += dir * STEP;
+    applyTransform(xRef.current);
+
+    setTimeout(() => {
+      normalizeX();
+      isAnimatingRef.current = false;
+    }, MOVE_TIME);
+  };
+
+  /* ---------------- autoplay ---------------- */
   useEffect(() => {
-  if (paused) return;
+    if (paused) return;
 
-  const interval = setInterval(() => {
-    setActiveIndex((prev) => {
-      if (prev === projects.length - 1) {
-        setDirection(-1);
-        return prev - 1;
-      }
+    const loop = () => {
+      moveStep(1);
+      rafRef.current = setTimeout(loop, MOVE_TIME + HOLD_TIME);
+    };
 
-      if (prev === 0) {
-        setDirection(1);
-        return prev + 1;
-      }
+    rafRef.current = setTimeout(loop, HOLD_TIME);
+    return () => rafRef.current && clearTimeout(rafRef.current);
+  }, [paused, vw]);
 
-      return prev + direction;
-    });
-  }, 3000);
+  /* ---------------- drag ---------------- */
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    dragStartRef.current = e.clientX;
+    startXRef.current = xRef.current;
 
-  return () => clearInterval(interval);
-}, [direction, paused]);
+    const el = trackRef.current;
+    if (!el) return;
 
+    el.style.transition = "none";
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
+  };
 
+  const onPointerMove = (e: PointerEvent) => {
+    const delta = dragStartRef.current - e.clientX;
+    xRef.current = startXRef.current + delta;
+    applyTransform(xRef.current, false);
+  };
+
+  const onPointerUp = (e: PointerEvent) => {
+    const delta = dragStartRef.current - e.clientX;
+
+    window.removeEventListener("pointermove", onPointerMove);
+    window.removeEventListener("pointerup", onPointerUp);
+
+    if (Math.abs(delta) > STEP / 4) {
+      moveStep(delta > 0 ? 1 : -1);
+    } else {
+      applyTransform(xRef.current);
+    }
+  };
+
+  /* ---------------- initial position ---------------- */
+  useEffect(() => {
+    xRef.current = IMAGES.length * STEP; // 👈 start from middle copy
+    applyTransform(xRef.current, false);
+  }, [vw]);
+
+  /* ---------------- render ---------------- */
   return (
-    <section
-      id="project"
-      className="relative w-full bg-black py-[32px] overflow-visible"
-    >
-      {/* 🔴 CINEMATIC RED VIGNETTE */}
+    <section className="relative w-full bg-black py-[100px] overflow-hidden">
+      {/* vignette */}
       <div
-        className="absolute -top-2 -bottom-2 inset-x-0 pointer-events-none z-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
           background:
             "radial-gradient(circle at center, rgba(220,38,38,0.35) 0%, rgba(0,0,0,1) 75%)",
         }}
       />
 
-      {/* TITLE */}
-      <h2 className="relative z-10 text-center text-3xl xxs:text-[42px] xs1:text-[48px] md:text-[80px] lg:text-9xl font-extrabold mb-20">
+      {/* title */}
+      <h2 className="relative z-10 text-center text-3xl md:text-[80px] lg:text-9xl font-extrabold mb-20">
         <span className="text-white">OUR </span>
         <span className="text-red-600">PROJECTS</span>
       </h2>
 
-      <div className="relative z-10 w-full flex items-center">
-        {/* LEFT ARROW */}
-        <button
-          onClick={() => setActiveIndex((i) => Math.max(i - 1, 0))}
-          className="absolute left-6 z-30 text-white text-6xl opacity-70 hover:opacity-100 transition"
-        >
-          ‹
-        </button>
-
-        {/* VIEWPORT */}
-        <div className="w-full overflow-hidden" 
-        onMouseEnter={() => setPaused(true)}
-  onMouseLeave={() => setPaused(false)}>
-          <div
-            className="flex gap-8 transition-transform duration-700 ease-out items-center"
-            style={{
-              transform: `translateX(${centerOffset - activeIndex * STEP}px)`,
-              minHeight: "420px",
-            }}
+      {/* arrows */}
+      {!IS_MOBILE && (
+        <>
+          <button
+            onClick={() => moveStep(-1)}
+            className="absolute left-6 top-1/2 translate-y-15 z-20 text-white text-6xl opacity-70 hover:opacity-100"
           >
-            {projects.map((src, index) => {
-              const offset = index - activeIndex;
-              const distance = Math.abs(offset);
-              const isCenter = offset === 0;
+            ‹
+          </button>
+          <button
+            onClick={() => moveStep(1)}
+            className="absolute right-6 top-1/2 translate-y-15 z-20 text-white text-6xl opacity-70 hover:opacity-100"
+          >
+            ›
+          </button>
+        </>
+      )}
 
-              const rotateY = offset === 0 ? 0 : offset > 0 ? -18 : 18;
-
-              const scale = offset === 0 ? 0.95 : distance === 1 ? 0.92 : 0.82;
-
-              const translateZ = offset === 0 ? 120 : -distance * 80;
-
-              const blur = offset === 0 ? "blur(0px)" : "blur(1px)";
-
-              const brightness =
-                offset === 0 ? "brightness(1)" : "brightness(0.6)";
-
-              const zIndex = 50 - distance;
-
-              return (
-                <div
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className="relative w-[240px] h-[340px] shrink-0 cursor-pointer
-                             transition-all duration-700 ease-out"
-                  style={{
-                    transform: `
-                      perspective(1600px)
-                      translateZ(${translateZ}px)
-                      rotateY(${rotateY}deg)
-                      scale(${scale})
-                    `,
-                    filter: `${blur} ${brightness}`,
-                    zIndex,
-                  }}
-                >
-                  {/* 🔴 CENTER GLOW (LEFT & RIGHT ONLY) */}
-                  {isCenter && (
-                    <div
-                      className="absolute top-1/2 -translate-y-[calc(50%-10px)]
-               -left-30 -right-30 h-[40%]
-               bg-red-600/40 blur-[90px]
-               -z-10 rounded-full"
-                    />
-                  )}
-
-                  {/* POSTER */}
-                  <Image
-                    src={src}
-                    alt="movie"
-                    fill
-                    className="object-cover rounded-md shadow-2xl"
-                  />
-
-                  {/* 🌫️ DARK OVERLAY FOR SIDE CARDS */}
-                  {!isCenter && (
-                    <div className="absolute inset-0 bg-black/40 rounded-md" />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* RIGHT ARROW */}
-        <button
-          onClick={() =>
-            setActiveIndex((i) => Math.min(i + 1, projects.length - 1))
-          }
-          className="absolute right-6 z-30 text-white text-6xl opacity-70 hover:opacity-100 transition"
+      {/* viewport */}
+      <div
+        className="relative z-10 w-full overflow-hidden"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <div
+          ref={trackRef}
+          onPointerDown={onPointerDown}
+          className="flex items-center touch-pan-y cursor-grab active:cursor-grabbing"
+          style={{ minHeight: "420px", gap: `${GAP}px` }}
         >
-          ›
-        </button>
+          {projects.map((src, i) => {
+            const realIndex = i % IMAGES.length;
+            const offset = realIndex - activeIndex;
+            const distance = Math.abs(offset);
+            const isActive = realIndex === activeIndex;
+
+            return (
+              <div
+                key={i}
+                className="relative shrink-0 transition-all duration-700"
+                style={{
+                  width: CARD_WIDTH,
+                  height: IS_MOBILE ? 300 : 340,
+                  transform: `
+                    perspective(1600px)
+                    translateZ(${isActive ? 120 : -distance * 80}px)
+                    rotateY(${isActive ? 0 : offset > 0 ? -18 : 18}deg)
+                    scale(${
+                      isActive
+                        ? 0.95
+                        : distance === 1
+                        ? IS_MOBILE ? 0.78 : 0.92
+                        : IS_MOBILE ? 0.65 : 0.82
+                    })
+                  `,
+                  filter: isActive
+                    ? "brightness(1)"
+                    : "brightness(0.6) blur(1px)",
+                  zIndex: 50 - distance,
+                }}
+              >
+                {isActive && (
+                  <div className="absolute inset-x-[-120px] top-1/2 h-[40%] bg-red-600/40 blur-[90px] -z-10 rounded-full" />
+                )}
+
+                <Image
+                  src={src}
+                  alt="movie"
+                  fill
+                  className="object-cover rounded-md shadow-2xl"
+                />
+
+                {!isActive && (
+                  <div className="absolute inset-0 bg-black/40 rounded-md" />
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

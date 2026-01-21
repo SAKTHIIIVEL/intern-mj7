@@ -8,7 +8,7 @@ export default function HeroSection() {
 };
 
   return (
-    <section className="relative w-full h-[816px] overflow-hidden max-sm:h-[500px]">
+    <section id="hero" className="relative w-full h-[816px] overflow-hidden max-sm:h-[500px]">
       {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover"

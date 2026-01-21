@@ -196,6 +196,7 @@ export default function Footer() {
       >
         {/* LEFT : LOGO + ABOUT */}
         <div className="space-y-6">
+          <Link href="#hero">
           <div className="flex items-center gap-3">
             <Image
               src="/navbar_logo.png"
@@ -204,6 +205,7 @@ export default function Footer() {
               height={100}
             />
           </div>
+          </Link>
 
           <p
             className="

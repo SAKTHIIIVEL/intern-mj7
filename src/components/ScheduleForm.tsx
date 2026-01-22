@@ -206,9 +206,9 @@ export default function ScheduleForm() {
                   <option className="text-[15px]">Brand Collaboration</option>
                 </select>
 
-                <span className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
+                <span className="absolute right-[-10] top-1/2 -translate-y-1/2 pointer-events-none">
                   <svg
-                    className="w-10 h-10 text-black"
+                    className="w-7 h-7 xxs:w-8 xxs:h-8 xs:w-9 xs:h-9 md:w-10 md:h-10 text-black"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"

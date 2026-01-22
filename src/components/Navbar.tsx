@@ -73,7 +73,7 @@ export default function Navbar() {
           ✕
         </button>
 
-        <div className="flex flex-col justify-center items-start px-6 h-full gap-8">
+        <div className="flex flex-col py-[100px] items-start px-6 h-full gap-8">
           {navItems.map((item) => (
             <Link
               key={item}

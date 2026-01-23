@@ -33,11 +33,11 @@ const teamMembers: TeamMember[] = [
 
 export default function OurTeams() {
   return (
-    <section id="team" className="w-full bg-black xxs1:py-[50px] xxs:py-[50px] py-18 px-6 lg:px-20">
+    <section id="team" className="w-full py-[30px] bg-black xxs1:py-[50px] xxs:py-[50px] md:py-18 px-6 lg:px-20">
       
       {/* Heading */}
       <div className="max-w-9xl mx-auto mb-16 text-center px-4 lg:px-12">
-        <h2 className="text-[38px] xxs:text-[42px] xs1:text-[48px] md:text-[70px] lg:text-[100px] font-[900] mb-6 text-center lg:text-left">
+        <h2 className="text-[36px] xxs:text-[42px] xs1:text-[48px] md:text-[70px] lg:text-[100px] font-[900] mb-6 text-center lg:text-left">
           <span className="text-[#C4C4C4]">OUR </span>
           <span className="text-red-600">TEAMS</span>
         </h2>

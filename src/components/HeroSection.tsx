@@ -30,7 +30,7 @@ export default function HeroSection() {
         </p>
 
         {/* Main Heading */}
-        <h1 className="xxs1:text-[18px] xxs:text-[20px] xs:text-[22px] xs1:text-[23px] sm:text-[28px] text-white font-extrabold text-[36px] md:text-[48px] lg:text-[64px] leading-tight max-w-5xl">
+        <h1 className="text-[18px] xxs1:text-[18px] xxs:text-[20px] xs:text-[22px] xs1:text-[23px] sm:text-[28px] text-white font-extrabold  md:text-[48px] lg:text-[64px] leading-tight max-w-5xl">
           We Don’t Just Make{" "}
           <span className="text-red-600">Movies</span>, <br />
           We Create{" "}

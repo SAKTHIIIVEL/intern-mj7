@@ -68,8 +68,8 @@ export default function ScheduleForm() {
         {/* Title */}
         <h2
           className="
-            absolute -top-35 left-6 lg:left-13
-            text-[64px] max-sm:text-[48px] max-sm:top-[-100px]
+            absolute md:-top-35 left-6 lg:left-13 text-[40px]
+            xxs:text-[48px] xs1:text-[56px] md:text-[64px] top-[-100px]
             lg:text-[130px]
             font-[900] text-red-600
             md:text-[100px]

@@ -113,7 +113,7 @@ export default function ContactUs() {
     <section
       id="contact"
       className="
-        w-full bg-black py-24 px-6
+        w-full bg-black py-12 px-6 lg:py-24 lg:px-6
 
         /* 📱 mobile */
         max-sm:px-[20px] max-sm:py-[70px]
@@ -122,8 +122,8 @@ export default function ContactUs() {
         min-[768px]:max-[1023px]:px-[40px]
 
         /* 💻 desktop */
-        max-[1439px]:px-[120px]
-        min-[1440px]:px-[152px]
+        xl:px-[130px]
+        2xl:px-[152px]
       "
     >
       <div

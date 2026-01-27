@@ -11,6 +11,7 @@ export default function Banner() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
+        
         <source src="/banner_video2.mp4" type="video/mp4" />
       </video>
       {/* Image Overlay */}

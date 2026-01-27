@@ -26,7 +26,7 @@ export default function ScheduleForm() {
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
-  const dateRef = useRef(null);
+  const dateRef = useRef<HTMLInputElement | null>(null);
   const validate = () => {
     const newErrors: Partial<FormData> = {};
 
@@ -63,6 +63,17 @@ export default function ScheduleForm() {
     console.log("Form Data:", form);
     alert("Form submitted successfully!");
   };
+  const openDatePicker = () => {
+  const input = dateRef.current;
+  if (!input) return;
+
+  if (typeof (input as any).showPicker === "function") {
+    (input as any).showPicker();
+  } else {
+    input.focus();
+  }
+};
+
 
   return (
     <section className="w-full bg-black py-26 px-6 lg:px-20 relative overflow-hidden">
@@ -173,9 +184,7 @@ export default function ScheduleForm() {
             {/* Date */}
             <div
               className="relative cursor-pointer"
-              onClick={() =>
-                dateRef.current?.showPicker?.() || dateRef.current?.focus()
-              }
+               onClick={openDatePicker}
             >
               <label className="block text-[16px] md:text-[18px] lg:text-[21px] text-gray-600 mb-2">
                 Available Dates
@@ -194,7 +203,7 @@ export default function ScheduleForm() {
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation(); // prevent double click
-                  dateRef.current?.showPicker?.() || dateRef.current?.focus();
+                  openDatePicker();
                 }}
                 className="absolute right-2 top-1/2 -translate-y-1/2"
               >

@@ -154,7 +154,7 @@ export default function ProjectsScroller() {
 
   /* ---------------- render ---------------- */
   return (
-    <section className="relative w-full bg-black py-[30px] xxs1:py-[50px] xxs:py-[50px] md:py-[100px] overflow-hidden">
+    <section className="relative w-full bg-black py-[30px] xxs1:py-[50px] xxs:py-[50px] md:py-[70px] overflow-hidden">
       {/* vignette */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -165,7 +165,7 @@ export default function ProjectsScroller() {
       />
 
       {/* title */}
-      <h2 className="relative z-10 text-center text-3xl mb-0 xxs1:mb-0 xxs:text-[38px] xxs:mb-0 xs:text-[38px] xs:mb-0 xs1:text-[42px] xs1:mb-0 sm:mb-0 sm:text-[48px] md:text-[80px] lg:text-9xl font-extrabold md:mb-20">
+      <h2 className="relative z-10 text-center text-3xl mb-0 xxs1:mb-0 xxs:text-[38px] xxs:mb-0 xs:text-[42px] xs:mb-0 xs1:text-[48px] xs1:mb-0 sm:mb-0 sm:text-[48px] md:text-[80px] lg:text-[100px] font-[900] md:mb-20">
         <span className="text-white">OUR </span>
         <span className="text-red-600">PROJECTS</span>
       </h2>

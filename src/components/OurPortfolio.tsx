@@ -46,7 +46,7 @@ export default function OurPortfolio() {
     >
       {/* Heading */}
       <div className="text-center px-[10px] md:mb-12">
-        <h2 className="text-[38px] xxs1:text-[32px] xxs:text-[38px] xs1:text-[44px] md:text-[64px] lg:text-[96px] font-[900]">
+        <h2 className="text-[38px] xxs1:text-[32px] xxs:text-[38px] xs1:text-[44px] md:text-[64px] lg:text-[100px] font-[900]">
           <span className="text-white">OUR </span>
           <span className="text-red-600">PORTFOLIO</span>
         </h2>

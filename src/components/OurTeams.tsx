@@ -37,7 +37,7 @@ export default function OurTeams() {
       
       {/* Heading */}
       <div className="max-w-9xl mx-auto mb-16 text-center px-4 lg:px-12">
-        <h2 className="text-[36px] xxs:text-[42px] xs1:text-[48px] md:text-[70px] lg:text-[100px] font-[900] mb-6 text-center lg:text-left">
+        <h2 className="text-[36px] xxs:text-[42px] xs1:text-[48px] md:text-[70px] lg:text-[100px] font-[900] mb-6 text-center lg:text-left lg:pl-[30px] xl:pl-[50px] 2xl:pl-[80px]">
           <span className="text-[#C4C4C4]">OUR </span>
           <span className="text-red-600">TEAMS</span>
         </h2>
@@ -58,7 +58,7 @@ export default function OurTeams() {
           lg:grid-cols-4
           gap-10
           place-items-center sm:place-items-stretch
-          lg:px-7
+          lg:px-17
         "
       >
         {teamMembers.map((member, index) => (

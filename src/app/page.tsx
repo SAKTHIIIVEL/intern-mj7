@@ -8,6 +8,7 @@ import OurPortfolio from "@/components/OurPortfolio";
 import ContactUs from "@/components/ContactUs";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
+import Stats from "@/components/Stats";
 
 
 export default function Home() {

@@ -26,17 +26,17 @@ export default function AboutUs() {
     <section
       id="about"
       ref={sectionRef}
-      className="w-full bg-black py-4 px-5 md:py-13 md:px-12 xxs:px-6 xs:px-7  overflow-hidden"
+      className="w-full bg-black py-4 px-5 lg:pl-34 lg:pr-27 md:py-13 md:px-12 xxs:px-3 xs:px-4  overflow-hidden 2xl:pl-48"
     >
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
-        <h2 className="text-left text-red-600 text-[34px] xxs:text-[38px] xs:text-[48px] xs1:text-[53px] max-sm:text-center lg:pl-[110px] md:text-[96px] md:text-center font-[900] mb-13 uppercase">
+        <h2 className="text-left text-red-600 text-[34px] xxs:text-[38px] xs:text-[48px] xs1:text-[53px] max-sm:text-center lg:text-left md:text-[96px] md:text-center font-[900] mb-5 uppercase">
           ABOUT <span className="text-gray-200">US</span>
         </h2>
 
         {/* Content Section */}
         {/* Content Section */}
-<div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+<div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-8 2xl:gap-0">
 
   {/* Left Side - Image */}
   <div
@@ -49,8 +49,8 @@ export default function AboutUs() {
       <Image
         src="/About_us_image.png"
         alt="MJ7 Logo"
-        width={500}
-        height={500}
+        width={450}
+        height={450}
         className="object-contain"
         priority
       />
@@ -59,7 +59,7 @@ export default function AboutUs() {
 
   {/* Right Side - Text */}
   <div
-    className={`w-full text-center px-4 lg:text-left lg:px-0 lg:w-1/2 text-white space-y-6 pr-0 lg:pr-11
+    className={`w-full text-center sm:px-4 xxs:px-0 lg:text-left lg:px-0 lg:w-1/2 text-white space-y-6 pr-0 lg:pr-2 2xl:pr-10
       transition-all duration-1000 ease-out delay-200
       ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"}
     `}

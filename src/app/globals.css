@@ -137,3 +137,8 @@ section {
     1250ms,
     1900ms;
 }
+
+/* hide calender icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}

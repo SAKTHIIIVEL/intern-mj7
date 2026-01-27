@@ -1,9 +1,34 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement | null>(null);
+const [playAnimation, setPlayAnimation] = useState(false);
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        // toggle to force re-render (restart animation)
+        setPlayAnimation(false);
+        requestAnimationFrame(() => setPlayAnimation(true));
+      }
+    },
+    {
+      threshold: 0.2, // play when 20% visible
+    }
+  );
+
+  if (footerRef.current) {
+    observer.observe(footerRef.current);
+  }
+
+  return () => observer.disconnect();
+}, []);
+
   return (
-    <footer className="w-full bg-black text-white relative overflow-hidden">
+    <footer ref={footerRef} className="w-full bg-black text-white relative overflow-hidden">
       {/* FILM STRIP (FULL WIDTH) */}
       <div className="w-full overflow-hidden mb-10">
         <svg
@@ -21,7 +46,7 @@ export default function Footer() {
               type="rotate"
               values="-75 0 160; 0 0 160; 0 0 160; -75 0 160"
               keyTimes="0;0.06;0.92;1"
-              dur="3s"
+              dur="2s"
               repeatCount="indefinite"
               calcMode="spline"
               keySplines="
@@ -36,7 +61,7 @@ export default function Footer() {
               type="translate"
               values="0 -14; 0 10; 0 10; 0 -14"
               keyTimes="0;0.06;0.92;1"
-              dur="3s"
+              dur="2s"
               repeatCount="indefinite"
               additive="sum"
             />

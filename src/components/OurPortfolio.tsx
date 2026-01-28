@@ -4,13 +4,13 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const posters = [
-  "/movie_posters/movie_1.png",
+  "/movie_posters/movie1.jpg",
+  "/movie_posters/movie2.jpg",
+  "/movie_posters/movie3.jpg",
+  "/movie_posters/movie4.jpg",
+  "/movie_posters/movie5.png",
+  "/movie_posters/movie6.jpg",
   "/movie_posters/movie_2.jpg",
-  "/movie_posters/movie_3.jpg",
-  "/movie_posters/movie_4.jpg",
-  "/movie_posters/movie_5.jpg",
-  "/movie_posters/movie_2.jpg",
-  "/movie_posters/movie_3.jpg",
 ];
 
 const STACK_BASE_X = -120;

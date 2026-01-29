@@ -101,7 +101,7 @@ export default function ContactUs() {
   location: form.location.trim(),
   message: form.message.trim(),
 };
-      await axios.post("http://localhost:5000/api/contact", cleanedForm);
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, cleanedForm);
       setSuccess("Message sent successfully!");
       setForm({
         firstName: "",

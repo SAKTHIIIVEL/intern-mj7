@@ -70,7 +70,7 @@ export default function ScheduleForm() {
     try {
       setLoading(true);
 
-      await axios.post("http://localhost:5000/api/meeting", {
+      await axios.post( `${process.env.NEXT_PUBLIC_API_URL}/api/meeting`, {
         firstName: form.firstName.trim(),
         lastName: form.lastName.trim(),
         email: form.email.trim(),

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRef } from "react";
+import axios from "axios";
 
 type FormData = {
   firstName: string;
@@ -25,6 +26,8 @@ export default function ScheduleForm() {
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
 
   const dateRef = useRef<HTMLInputElement | null>(null);
   const validate = () => {
@@ -56,24 +59,59 @@ export default function ScheduleForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (loading) return;
+    setSuccess("");
+
     if (!validate()) return;
 
-    console.log("Form Data:", form);
-    alert("Form submitted successfully!");
+    try {
+      setLoading(true);
+
+      await axios.post("http://localhost:5000/api/meeting", {
+        firstName: form.firstName.trim(),
+        lastName: form.lastName.trim(),
+        email: form.email.trim(),
+        phone: form.phone,
+        availableDate: form.date, // 🔥 FIX HERE
+        category: form.category,
+        reason: form.reason.trim(),
+      });
+
+      setSuccess("Meeting request submitted successfully!");
+
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        date: "",
+        category: "",
+        reason: "",
+      });
+    } catch (error: unknown) {
+      const msg = axios.isAxiosError(error)
+        ? (error.response?.data?.message ?? "Failed to schedule meeting")
+        : "Failed to schedule meeting";
+
+      alert(msg);
+    } finally {
+      setLoading(false);
+    }
   };
+
   const openDatePicker = () => {
-  const input = dateRef.current;
-  if (!input) return;
+    const input = dateRef.current;
+    if (!input) return;
 
-  if (typeof (input as any).showPicker === "function") {
-    (input as any).showPicker();
-  } else {
-    input.focus();
-  }
-};
-
+    if (typeof (input as any).showPicker === "function") {
+      (input as any).showPicker();
+    } else {
+      input.focus();
+    }
+  };
 
   return (
     <section className="w-full bg-black py-26 px-6 lg:px-20 relative overflow-hidden">
@@ -182,10 +220,7 @@ export default function ScheduleForm() {
             </div>
 
             {/* Date */}
-            <div
-              className="relative cursor-pointer"
-               onClick={openDatePicker}
-            >
+            <div className="relative cursor-pointer" onClick={openDatePicker}>
               <label className="block text-[16px] md:text-[18px] lg:text-[21px] text-gray-600 mb-2">
                 Available Dates
               </label>
@@ -299,12 +334,17 @@ export default function ScheduleForm() {
             </div>
 
             {/* Submit */}
+            {success && (
+              <p className="text-green-600 text-sm lg:col-span-2">{success}</p>
+            )}
+
             <div className="lg:col-span-2 mt-6">
               <button
                 type="submit"
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-4 font-semibold md:text-[18px] tracking-wide transition"
+                disabled={loading}
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-4 font-semibold md:text-[18px] tracking-wide transition disabled:opacity-60"
               >
-                Submit
+                {loading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </form>

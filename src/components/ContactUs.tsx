@@ -87,12 +87,21 @@ export default function ContactUs() {
   /* -------------------- SUBMIT -------------------- */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+     // ⛔ Prevent double submit
+  if (loading) return;
     setSuccess("");
     if (!validate()) return;
 
     try {
       setLoading(true);
-      await axios.post("/api/contact", form);
+      const cleanedForm = {
+  ...form,
+  firstName: form.firstName.trim(),
+  email: form.email.trim(),
+  location: form.location.trim(),
+  message: form.message.trim(),
+};
+      await axios.post("http://localhost:5000/api/contact", cleanedForm);
       setSuccess("Message sent successfully!");
       setForm({
         firstName: "",
@@ -101,9 +110,15 @@ export default function ContactUs() {
         location: "",
         message: "",
       });
-    } catch {
-      alert("Failed to send message");
-    } finally {
+    } catch (error: unknown) {
+  let msg = "Failed to send message";
+
+  if (axios.isAxiosError(error)) {
+    msg = error.response?.data?.message || msg;
+  }
+
+  alert(msg);
+} finally {
       setLoading(false);
     }
   };

@@ -43,12 +43,22 @@ export default function ProjectsScroller() {
   const MOVE_TIME = 700;
   const HOLD_TIME = 900;
 
+  const physicalIndexRef = useRef(IMAGES.length); // start in middle copy
+
   /* ---------------- state ---------------- */
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
   /* ---------------- helpers ---------------- */
   const getCenterOffset = () => vw / 2 - CARD_WIDTH / 2;
+
+  const getXFromIndex = (index: number) => {
+    return (IMAGES.length + index) * STEP;
+  };
+  const getXFromPhysicalIndex = (pIndex: number) => {
+  return pIndex * STEP;
+};
+
 
   const applyTransform = (x: number, animate = true) => {
     const el = trackRef.current;
@@ -77,42 +87,56 @@ export default function ProjectsScroller() {
 
   /* ---------------- step movement ---------------- */
   const moveStep = (dir: number) => {
-    if (isAnimatingRef.current) return;
+  if (isAnimatingRef.current) return;
+  isAnimatingRef.current = true;
 
-    isAnimatingRef.current = true;
+  // 1️⃣ move physically
+  physicalIndexRef.current += dir;
 
-    // activate NEXT card first
-    setActiveIndex((prev) => (prev + dir + IMAGES.length) % IMAGES.length);
+  xRef.current = getXFromPhysicalIndex(physicalIndexRef.current);
+  applyTransform(xRef.current);
 
-    // then move track
-    xRef.current += dir * STEP;
-    applyTransform(xRef.current);
+  // 2️⃣ update logical active index
+  setActiveIndex((prev) => (prev + dir + IMAGES.length) % IMAGES.length);
 
-    setTimeout(() => {
-      normalizeX();
-      isAnimatingRef.current = false;
-    }, MOVE_TIME);
-  };
+  setTimeout(() => {
+    const total = IMAGES.length;
+
+    // 3️⃣ normalize ONLY physical index (no animation)
+    if (physicalIndexRef.current >= total * 2) {
+      physicalIndexRef.current -= total;
+    }
+
+    if (physicalIndexRef.current < total) {
+      physicalIndexRef.current += total;
+    }
+
+    xRef.current = getXFromPhysicalIndex(physicalIndexRef.current);
+    applyTransform(xRef.current, false);
+
+    isAnimatingRef.current = false;
+  }, MOVE_TIME);
+};
+
 
   /* ---------------- autoplay ---------------- */
   useEffect(() => {
-  if (paused) return;
+    if (paused) return;
 
-  const loop = () => {
-    moveStep(1);
-    rafRef.current = setTimeout(loop, MOVE_TIME + HOLD_TIME);
-  };
+    const loop = () => {
+      moveStep(1);
+      rafRef.current = setTimeout(loop, MOVE_TIME + HOLD_TIME);
+    };
 
-  rafRef.current = setTimeout(loop, HOLD_TIME);
+    rafRef.current = setTimeout(loop, HOLD_TIME);
 
-  return () => {
-    if (rafRef.current !== null) {
-      clearTimeout(rafRef.current);
-      rafRef.current = null;
-    }
-  };
-}, [paused, vw]);
-
+    return () => {
+      if (rafRef.current !== null) {
+        clearTimeout(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [paused, vw]);
 
   /* ---------------- drag ---------------- */
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -134,23 +158,29 @@ export default function ProjectsScroller() {
   };
 
   const onPointerUp = (e: PointerEvent) => {
-    const delta = dragStartRef.current - e.clientX;
+  const delta = dragStartRef.current - e.clientX;
 
-    window.removeEventListener("pointermove", onPointerMove);
-    window.removeEventListener("pointerup", onPointerUp);
+  window.removeEventListener("pointermove", onPointerMove);
+  window.removeEventListener("pointerup", onPointerUp);
 
-    if (Math.abs(delta) > STEP / 4) {
-      moveStep(delta > 0 ? 1 : -1);
-    } else {
-      applyTransform(xRef.current);
-    }
-  };
+  const movedSteps = Math.round(delta / STEP);
+
+  if (movedSteps !== 0) {
+    moveStep(movedSteps);
+  } else {
+    xRef.current = getXFromPhysicalIndex(physicalIndexRef.current);
+    applyTransform(xRef.current);
+  }
+};
+
 
   /* ---------------- initial position ---------------- */
   useEffect(() => {
-    xRef.current = IMAGES.length * STEP; // 👈 start from middle copy
-    applyTransform(xRef.current, false);
-  }, [vw]);
+  physicalIndexRef.current = IMAGES.length;
+  xRef.current = getXFromPhysicalIndex(physicalIndexRef.current);
+  applyTransform(xRef.current, false);
+}, [vw]);
+
 
   /* ---------------- render ---------------- */
   return (
@@ -221,8 +251,12 @@ export default function ProjectsScroller() {
                       isActive
                         ? 0.95
                         : distance === 1
-                        ? IS_MOBILE ? 0.78 : 0.92
-                        : IS_MOBILE ? 0.65 : 0.82
+                          ? IS_MOBILE
+                            ? 0.78
+                            : 0.92
+                          : IS_MOBILE
+                            ? 0.65
+                            : 0.82
                     })
                   `,
                   filter: isActive

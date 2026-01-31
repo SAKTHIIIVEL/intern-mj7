@@ -26,7 +26,7 @@ export default function AboutUs() {
     <section
       id="about"
       ref={sectionRef}
-      className="w-full bg-black py-4 px-5 lg:pl-34 lg:pr-27 md:py-13 md:px-12 xxs:px-3 xs:px-4  overflow-hidden 2xl:pl-48"
+      className="w-full bg-black py-4 px-5 lg:pl-34 lg:pr-27 md:py-13 md:px-12 xxs:px-3 xs:px-4 lg:pb-[100px] overflow-hidden 2xl:pl-48"
     >
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}

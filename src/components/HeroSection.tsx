@@ -40,7 +40,7 @@ export default function HeroSection() {
         {/* CTA Button */}
         <button
           className="mt-16 px-8 py-4 bg-red-600 xxs:text-[15px]
-          xs:text-[16px] xs1:text-[17px] max-sm:font-[500] hover:bg-red-700
+          xs:text-[16px] xs1:text-[17px] md:text-[24px] max-sm:font-[500] hover:bg-red-700
                      text-white font-semibold rounded-md
                      transition duration-300"
                      onClick={handleContactScroll}

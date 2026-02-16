@@ -184,7 +184,7 @@ export default function ProjectsScroller() {
 
   /* ---------------- render ---------------- */
   return (
-    <section className="relative w-full bg-black py-[30px] xxs1:py-[50px] xxs:py-[50px] md:py-[70px] overflow-hidden">
+    <section id="project" className="relative w-full bg-black py-[30px] xxs1:py-[50px] xxs:py-[50px] md:py-[70px] overflow-hidden">
       {/* vignette */}
       <div
         className="absolute inset-0 pointer-events-none"

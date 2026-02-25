@@ -10,12 +10,7 @@ type TeamCardProps = {
 
 export default function TeamCard({ name, role, image }: TeamCardProps) {
   return (
-    <div
-      className="relative w-[240px] h-[390px] bg-black overflow-hidden
-             transition-all duration-500 ease-out
-             hover:-translate-y-5 hover:scale-[1.02]
-             hover:shadow-[0_30px_60px_rgba(0,0,0,0.8)]"
-    >
+    <div className="team-card group relative w-[240px] h-[390px]  overflow-hidden rounded-[15px] transition-all duration-500 ease">
       {/* Red Vertical Pill (CENTERED, NOT FULL HEIGHT) */}
       <div
         className="absolute left-1 top-1/2 -translate-y-1/2 

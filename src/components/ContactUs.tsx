@@ -240,7 +240,7 @@ export default function ContactUs() {
               </svg>
             </div>
 
-            <div
+            {/* <div
               className="w-18 h-18 rounded-full
              bg-[#111]
              flex items-center justify-center
@@ -259,7 +259,7 @@ export default function ContactUs() {
                   fill="#FB270C"
                 />
               </svg>
-            </div>
+            </div> */}
 
             <div
               className="w-18 h-18 rounded-full
@@ -400,7 +400,7 @@ export default function ContactUs() {
         </form>
 
         {/* mobile socials */}
-        <div className="flex gap-8 mt-[30px] md:hidden lg:hidden">
+        <div className="flex justify-center gap-8 mt-[30px] md:hidden lg:hidden">
           {/* icons unchanged */}
           <div
             className="w-18 h-18 rounded-full
@@ -450,7 +450,7 @@ export default function ContactUs() {
             </svg>
           </div>
 
-          <div
+          {/* <div
             className="w-18 h-18 rounded-full
              bg-[#111]
              flex items-center justify-center
@@ -469,7 +469,7 @@ export default function ContactUs() {
                 fill="#FB270C"
               />
             </svg>
-          </div>
+          </div> */}
 
           <div
             className="w-18 h-18 rounded-full

@@ -15,10 +15,7 @@ export default function AboutUs() {
       { threshold: 0.3 },
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -26,90 +23,114 @@ export default function AboutUs() {
     <section
       id="about"
       ref={sectionRef}
-      className="w-full bg-black py-4 px-5 lg:pl-34 lg:pr-27 md:py-13 md:px-12 xxs:px-3 xs:px-4 lg:pb-[100px] overflow-hidden 2xl:pl-48"
+      className="w-full bg-gradient-to-b from-black via-[#0a0a0a] to-black 
+                 py-12 px-5 md:px-12 lg:px-24 overflow-hidden"
     >
-      <div className="max-w-[1440px] mx-auto">
-        {/* Header */}
-        <h2 className="text-left text-red-600 text-[34px] xxs:text-[38px] xs:text-[48px] xs1:text-[53px] max-sm:text-center lg:text-left lg:text-[100px] md:text-[96px] md:text-center font-[900] mb-5 uppercase">
+      <div className="lg:max-w-[990px] xl1:max-w-[1180px] mx-auto">
+        {/* ===== HEADER ===== */}
+        <h2 className="text-left text-red-600 text-[34px] xxs:text-[38px] xs:text-[48px] xs1:text-[53px] max-sm:text-center lg:text-left lg:text-[100px] md:text-[96px] md:text-center font-[900] mb-14 uppercase">
           ABOUT <span className="text-gray-200">US</span>
         </h2>
 
-        {/* Content Section */}
-        {/* Content Section */}
-<div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-8 2xl:gap-0">
+        {/* ================= ROW 1 ================= */}
+        <div className="flex flex-col lg:flex-row items-center gap-12 mb-10 lg:mb-20">
+          {/* Left Image */}
+          <div
+            className={`w-full lg:w-1/2 flex justify-center transition-all duration-1000 ease-out
+            ${
+              isVisible
+                ? "opacity-100 translate-x-0 translate-y-0"
+                : "opacity-0 translate-y-10 lg:-translate-x-20 lg:translate-y-0"
+            }`}
+          >
+            <div className="relative w-[85%] sm:w-[75%] md:w-[65%] lg:w-full max-w-[520px]">
+              <Image
+                src="/about_image1.png"
+                alt="Film Production"
+                width={520}
+                height={520}
+                className="rounded-2xl shadow-2xl object-cover"
+                priority
+              />
+            </div>
+          </div>
 
-  {/* Left Side - Image */}
-  <div
-    className={`flex-shrink-0 w-full lg:w-1/2 flex justify-center
-      transition-all duration-1000 ease-out
-      ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-20"}
-    `}
-  >
-    <div className="relative w-full max-w-[500px]">
-      <Image
-        src="/About_us_image.png"
-        alt="MJ7 Logo"
-        width={450}
-        height={450}
-        className="object-contain"
-        priority
-      />
-    </div>
-  </div>
+          {/* Right Text */}
+          <div
+            className={`w-full lg:w-1/2 text-white text-center lg:text-left transition-all duration-1000 ease-out delay-200
+            ${isVisible 
+  ? "opacity-100 translate-x-0 translate-y-0" 
+  : "opacity-0 translate-y-10 lg:translate-x-20 lg:translate-y-0"
+}`}
+          >
+            <p className="text-base sm:text-lg md:text-xl lg:text-xl leading-relaxed text-[#FFFFFFC2]">
+              We are a dynamic film production company working across native,
+              interstate, and international markets, delivering content in
+              multiple languages particularly Tamil, Telugu, Hindi, and
+              Malayalam. With a strong vision to create impactful cinema, we
+              collaborate with national and global partners to bring powerful
+              stories to life.
+            </p>
 
-  {/* Right Side - Text */}
-  <div
-    className={`w-full text-center sm:px-4 xxs:px-0 lg:text-left lg:px-0 lg:w-1/2 text-white space-y-6 pr-0 lg:pr-2 2xl:pr-10
-      transition-all duration-1000 ease-out delay-200
-      ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-20"}
-    `}
-  >
-    <p className="text-lg lg:text-xl leading-relaxed mb-1">
-      MJ7 Cinema Production is a creative powerhouse dedicated to
-      crafting compelling cinematic experiences that resonate with
-      audiences across cultures and platforms.
-    </p>
+            <p className="mt-6 text-base sm:text-lg md:text-xl lg:text-xl leading-relaxed text-[#FFFFFFC2]">
+              Our team consists of experienced technical experts, directors, and
+              creative professionals, enabling us to handle projects of all
+              scales—from small independent films to large, high-budget
+              commercial productions. We also act as line producers, ensuring
+              seamless execution, budget control, and timely project delivery.
+            </p>
+          </div>
+        </div>
 
-    <p className="text-lg lg:text-xl leading-relaxed">
-      Founded with a passion for storytelling and visual excellence, MJ7
-      stands at the intersection of creativity, technology, and emotion.
-      We specialize in producing high-quality films, digital content,
-      and visual narratives that blend strong concepts with striking
-      aesthetics. From concept development to final execution, our team
-      is committed to delivering stories that are authentic, impactful,
-      and timeless.
-    </p>
-  </div>
+        {/* ================= ROW 2 ================= */}
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          {/* Left Text */}
+          <div
+            className={`w-full lg:w-1/2 text-white order-2 lg:order-1 text-center lg:text-left transition-all duration-1000 ease-out
+            ${isVisible 
+  ? "opacity-100 translate-x-0 translate-y-0" 
+  : "opacity-0 translate-y-10 lg:-translate-x-20 lg:translate-y-0"
+}`}
+          >
+            <p className="text-base sm:text-lg md:text-xl lg:text-xl leading-relaxed text-[#FFFFFFC2]">
+              We believe in collaboration and innovation. We actively partner
+              with investors, co-producers, direction teams, writers, and
+              creative talents who are passionate about shaping the future of
+              the film industry. With access to multiple investors and an
+              expanding network, we welcome new collaborations that align with
+              our commitment to quality and efficiency. Beyond production, we
+              provide a strong platform for emerging actors, artists, and
+              filmmakers. We not only offer opportunities based on talent and
+              performance but also provide guidance and mentorship to help
+              refine their craft.
+            </p>
 
-</div>
+            <p className="mt-6 text-base sm:text-lg md:text-xl lg:text-xl leading-relaxed text-[#FFFFFFC2]">
+              Our motto is simple: Deliver quality cinema within timelines while
+              nurturing creativity and building meaningful partnerships for the
+              future of the film industry.
+            </p>
+          </div>
 
-        {/* ✅ MOBILE-ONLY STATS — PLACE HERE */}
-    <div
-  className={`hidden mt-16 space-y-10 text-center
-    transition-all duration-1000 ease-out delay-300
-    ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}
-  `}
->
-      <div>
-        <h3 className="text-white text-5xl font-extrabold">10+</h3>
-        <p className="text-red-500 mt-2">Years in the business</p>
-      </div>
-
-      <div>
-        <h3 className="text-white text-5xl font-extrabold">20+</h3>
-        <p className="text-red-500 mt-2">Projects Completed</p>
-      </div>
-
-      <div>
-        <h3 className="text-white text-5xl font-extrabold">25+</h3>
-        <p className="text-red-500 mt-2">Happy Partners</p>
-      </div>
-
-      <div>
-        <h3 className="text-white text-5xl font-extrabold">50+</h3>
-        <p className="text-red-500 mt-2">Active Followers</p>
-      </div>
-    </div>
+          {/* Right Image */}
+          <div
+            className={`w-full lg:w-1/2 flex justify-center order-1 lg:order-2 transition-all duration-1000 ease-out delay-200
+           ${isVisible 
+  ? "opacity-100 translate-x-0 translate-y-0" 
+  : "opacity-0 translate-y-10 lg:translate-x-20 lg:translate-y-0"
+}`}
+          >
+            <div className="relative w-[85%] sm:w-[75%] md:w-[65%] lg:w-full max-w-[520px]">
+              <Image
+                src="/about_image2.png"
+                alt="Cinema Camera"
+                width={520}
+                height={520}
+                className="rounded-2xl shadow-2xl object-cover"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import TeamCard from "./TeamCard";
 
 type TeamMember = {
@@ -29,12 +30,67 @@ const teamMembers: TeamMember[] = [
     role: "FINANCIAL ADMINISTRATOR",
     image: "/team/dinesh.png",
   },
+  {
+    name: "sakthi",
+    role: "FINANCIAL ADMINISTRATOR",
+    image: "/team/dinesh.png",
+  },
 ];
 
 export default function OurTeams() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number>(0);
+  const positionRef = useRef(0);
+
+  useEffect(() => {
+  const track = trackRef.current;
+  if (!track) return;
+
+  const speed = 0.6;
+  const singleSetWidth = track.scrollWidth / 2;
+
+  let isPaused = false;
+
+  const animate = () => {
+    if (!isPaused) {
+      positionRef.current -= speed;
+
+      if (Math.abs(positionRef.current) >= singleSetWidth) {
+        positionRef.current = 0;
+      }
+
+      track.style.transform = `translateX(${positionRef.current}px)`;
+    }
+
+    animationRef.current = requestAnimationFrame(animate);
+  };
+
+  animationRef.current = requestAnimationFrame(animate);
+
+  // Pause on hover
+  const handleMouseEnter = () => {
+    isPaused = true;
+  };
+
+  const handleMouseLeave = () => {
+    isPaused = false;
+  };
+
+  track.addEventListener("mouseenter", handleMouseEnter);
+  track.addEventListener("mouseleave", handleMouseLeave);
+
+  return () => {
+    cancelAnimationFrame(animationRef.current);
+    track.removeEventListener("mouseenter", handleMouseEnter);
+    track.removeEventListener("mouseleave", handleMouseLeave);
+  };
+}, []);
+
   return (
-    <section id="team" className="w-full py-[30px] bg-black xxs1:py-[50px] xxs:py-[50px] md:py-18 px-6 lg:px-20">
-      
+    <section
+      id="team"
+      className="w-full py-[30px] bg-black xxs1:py-[50px] xxs:py-[50px] md:py-18 px-6 lg:px-20"
+    >
       {/* Heading */}
       <div className="max-w-9xl mx-auto mb-16 text-center px-4 lg:px-12">
         <h2 className="text-[36px] xxs:text-[42px] xs1:text-[48px] md:text-[70px] lg:text-[100px] font-[900] mb-6 text-center lg:text-left lg:pl-[30px] xl:pl-[50px] 2xl:pl-[80px]">
@@ -50,25 +106,19 @@ export default function OurTeams() {
         </p>
       </div>
 
-      {/* Team Cards */}
-      <div
-        className="
-          max-w-7xl mx-auto
-          grid grid-cols-1 sm:grid-cols-2
-          lg:grid-cols-4
-          gap-10
-          place-items-center sm:place-items-stretch
-          lg:px-17
-        "
-      >
-        {teamMembers.map((member, index) => (
-          <TeamCard
-            key={index}
-            name={member.name}
-            role={member.role}
-            image={member.image}
-          />
-        ))}
+      {/* Infinite Scroll */}
+      <div className="relative overflow-hidden w-full mt-10">
+        <div ref={trackRef} className="flex w-max">
+          {[...teamMembers, ...teamMembers].map((member, index) => (
+            <div key={index} className="mx-6 flex-shrink-0">
+              <TeamCard
+                name={member.name}
+                role={member.role}
+                image={member.image}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

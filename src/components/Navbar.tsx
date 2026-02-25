@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Navbar() {
-  const navItems = ["ABOUT", "PROJECT", "TEAM", "PORTFOLIO", "CONTACT"];
+  const navItems = ["ABOUT", "PROJECT", "TEAM", "CAREER", "CONTACT"];
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (

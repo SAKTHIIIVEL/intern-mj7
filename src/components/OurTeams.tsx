@@ -11,28 +11,33 @@ type TeamMember = {
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Dinesh",
-    role: "CHIEF OPERATIVE OFFICER",
+    name: "Dr.Dheeran J.W",
+    role: "Director, Founder & Actor",
     image: "/team/dinesh.png",
   },
   {
-    name: "Chandru",
-    role: "PRODUCTION CONTROLLER",
+    name: "Rakesh Kumawat",
+    role: "Director",
     image: "/team/dinesh.png",
   },
   {
-    name: "Sidhu",
-    role: "PRODUCTION SUPERVISOR",
+    name: "Dir.Latha Maniyarasu",
+    role: "Creative Head Director",
     image: "/team/dinesh.png",
   },
   {
-    name: "Madesh",
-    role: "FINANCIAL ADMINISTRATOR",
+    name: "Mr.Madesh S",
+    role: "Executive Producer & Financial Administrator",
     image: "/team/dinesh.png",
   },
   {
-    name: "sakthi",
-    role: "FINANCIAL ADMINISTRATOR",
+    name: "Rup Kaur Sidhu",
+    role: "Production Supervisor",
+    image: "/team/dinesh.png",
+  },
+  {
+    name: "Chandhru",
+    role: "Production Controller",
     image: "/team/dinesh.png",
   },
 ];
@@ -95,7 +100,7 @@ export default function OurTeams() {
       <div className="max-w-9xl mx-auto mb-16 text-center px-4 lg:px-12">
         <h2 className="text-[36px] xxs:text-[42px] xs1:text-[48px] md:text-[70px] lg:text-[100px] font-[900] mb-6 text-center lg:text-left lg:pl-[30px] xl:pl-[50px] 2xl:pl-[80px]">
           <span className="text-[#C4C4C4]">OUR </span>
-          <span className="text-red-600">TEAMS</span>
+          <span className="text-red-600">TEAM</span>
         </h2>
 
         <p className="max-w-5xl mx-auto text-[#C4C4C4] text-[15px] md:text-[20px] lg:text-[24px] leading-relaxed text-center lg:text-left lg:pl-38">

@@ -305,8 +305,8 @@ useEffect(() => {
               </Link>
             </li>
             <li>
-              <Link href="#portfolio" className="hover:text-white transition">
-                Portfolio
+              <Link href="#career" className="hover:text-white transition">
+                Career
               </Link>
             </li>
           </ul>
@@ -431,7 +431,7 @@ useEffect(() => {
       lg:text-[16px]
     "
       >
-        © {new Date().getFullYear()} MJ7 CINE CREATORS PVT.LTD. All rights reserved.{" "}
+        © {new Date().getFullYear()} MJ7 CINE CREATIONS PVT.LTD. All rights reserved.{" "}
         <span className="text-red-600">Designed & Developed By Manvian</span>
       </div>
     </footer>

@@ -23,7 +23,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Dir.Latha Maniyarasu",
     role: "Creative Head Director",
-    image: "/team/dinesh.png",
+    image: "/team/female_1.png",
   },
   {
     name: "Mr.Madesh S",
@@ -33,7 +33,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Rup Kaur Sidhu",
     role: "Production Supervisor",
-    image: "/team/dinesh.png",
+    image: "/team/female_2.png",
   },
   
 ];

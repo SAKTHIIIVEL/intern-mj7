@@ -17,6 +17,9 @@ export default function TeamCard({ name, role, image }: TeamCardProps) {
       : name.length > 9
       ? "text-[2.8rem]"
       : "text-[3.5rem]";
+
+      const isFemale =
+  image.includes("female");
   return (
     <div className="team-card group relative w-[240px] h-[390px]  overflow-hidden rounded-[15px] transition-all duration-500 ease">
       {/* Red Vertical Pill (CENTERED, NOT FULL HEIGHT) */}
@@ -39,12 +42,15 @@ export default function TeamCard({ name, role, image }: TeamCardProps) {
       </div>
 
       {/* Person Image (LOWER + STRONG OVERLAP) */}
-      <div className="absolute inset-x-0 bottom-25 z-20 flex justify-center translate-x-6">
+      <div
+  className={`absolute inset-x-0 bottom-20 z-20 flex justify-center
+    ${isFemale ? "translate-x-12" : "translate-x-8"}`}
+>
         <Image
           src={image}
           alt={name}
-          width={260}
-          height={380}
+          width={isFemale ? 220 : 260}
+          height={isFemale ? 340 : 380}
           className="object-contain translate-y-6"
           priority
         />

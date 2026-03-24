@@ -35,11 +35,7 @@ const teamMembers: TeamMember[] = [
     role: "Production Supervisor",
     image: "/team/dinesh.png",
   },
-  {
-    name: "Chandhru",
-    role: "Production Controller",
-    image: "/team/dinesh.png",
-  },
+  
 ];
 
 export default function OurTeams() {

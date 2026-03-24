@@ -26,7 +26,7 @@ export default function Home() {
         {/* Banner Section */}
         <Banner />
 
-        <ProjectsScroller/>
+        {/* <ProjectsScroller/> */}
         <OurTeams />
         {/* <ScheduleForm />
         <OurPortfolio/> */}

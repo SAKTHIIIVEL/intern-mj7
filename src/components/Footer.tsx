@@ -363,7 +363,7 @@ useEffect(() => {
                   />{" "}
                 </svg>
               </span>
-              <span>+91-9677787817</span>
+              <span>+91-9940087817</span>
             </li>
 
             <li className="flex items-center gap-3">

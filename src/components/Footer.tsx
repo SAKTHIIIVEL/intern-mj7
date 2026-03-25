@@ -294,11 +294,11 @@ useEffect(() => {
                 About
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="#project" className="hover:text-white transition">
                 Projects
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="#team" className="hover:text-white transition">
                 Team
